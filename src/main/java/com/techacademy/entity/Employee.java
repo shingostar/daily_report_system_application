@@ -63,7 +63,7 @@ public class Employee {
     @Column(length = 255, nullable = false)
     private String password;
 
-    // 削除フラグ(論理削除を行うため)
+    // 削除フラグ(論理削除用)
     @Column(columnDefinition="TINYINT", nullable = false)
     private boolean deleteFlg;
 

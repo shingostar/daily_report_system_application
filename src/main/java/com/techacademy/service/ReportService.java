@@ -32,12 +32,12 @@ public class ReportService {
 
     // 日報保存（新規登録）
     @Transactional
-    // コントローラ側で受け取ったログインしたユーザー情報（Employee employee）と日付（Report report）を引数に
+    /** コントローラ側で受け取ったログインしているユーザー情報（Employee employee）と日付（Report report）を引数に格納します。*/
     public ErrorKinds save(Report report, Employee employee) {
 
-        // 重複条件
-        // 日報テーブルに、「ログイン中の従業員 かつ 入力した日付」の日報データが存在する場合エラー
-        // nullではないとき→ログインユーザーと入力した日付が見つかったらnullではない値が返ってくる。そのときエラー処理を行う。
+        /** 重複する条件 */
+        /** 日報テーブルに"ログイン中の従業員" かつ "入力した日付"の日報データが存在する場合エラー表示されます。 */
+        // nullでない場合ログインユーザーと入力した日付が見つかったらnullではない値が返ってくる。そのときエラー処理を行います。
 
         if (findByEmployeeAndReportDate(report, employee) != null) {
             return ErrorKinds.DATECHECK_ERROR;
@@ -57,9 +57,9 @@ public class ReportService {
     @Transactional
     public ErrorKinds update(Report report, Integer id,Employee employee) {
 
-        // 日報テーブルに、「画面で表示中の従業員 かつ 入力した日付」の日報データが存在する場合エラー
-        // 画面で表示中の日報データを除いたものについて、上記のチェックを行なうものとする
-        // 更新の場合、日付が変わったかつすでに社員のコード＋日付がある場合はエラー
+        /** 日報テーブルに"画面で表示中の従業員" かつ "入力した日付"の日報データが存在する場合エラー表示が出ます。 */
+        /** 画面で表示中の日報データを除いたものについて、上記のチェックを行なうものとします。 */
+        /** 更新の場合、日付が変わったかつすでに社員のコード＋日付がある場合はエラー表示が出ます。 */
 
         Report reportList = findByEmployeeAndReportDate(report, employee);
 
@@ -102,21 +102,21 @@ public class ReportService {
 
     // 1件を検索
     public Report findById(Integer id) {
-        // findByIdで検索
+        /** findByIdで検索 */
         Optional<Report> option = reportRepository.findById(id);
         // 取得できなかった場合はnullを返す
         Report report = option.orElse(null);
         return report;
     }
 
-    // idを1件検索して返す
+    // idを1件検索して返します
     public Report getId(Integer id) {
         return reportRepository.findById(id).get();
     }
 
     // ログインユーザーの情報と入力した日付を検索
     public Report findByEmployeeAndReportDate(Report report, Employee employee) {
-        // DBの情報を取得するにはリポジトリを介して行う→findByEmployeeAndReportDateをリポジトリで定義する必要あり
+        /** DBの情報を取得するにはリポジトリを介して行う→findByEmployeeAndReportDateをリポジトリで定義する必要があります。 */
         return reportRepository.findByEmployeeAndReportDate(employee, report.getReportDate());
     }
 }

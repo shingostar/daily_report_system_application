@@ -10,8 +10,8 @@ import com.techacademy.entity.Report;
 
 public interface ReportRepository extends JpaRepository<Report, Integer> {
 
-    //findBy"A"And"B"はJPAで自動実装されるメソッドなので下記の記述のみで使用可能
-    //findBy"A"And"B"=「SELECT〜FROM〜」をAとBどちらもおこなう→AとBのデータを取得する
+    /** findBy_A_And_B_はJPAで自動的に実装されるメソッドで下記の記述のみで使用しました */
+    /** findBy_A_And_B_= SELECT C FROM D (AとBどちらも探す=AとBのデータを取得する意味です） */
     Report findByEmployeeAndReportDate(Employee employee, LocalDate reportDate);
     List<Report> findByEmployee(Employee employee);
 }

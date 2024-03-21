@@ -67,10 +67,10 @@ public class ReportController {
     @PostMapping(value = "/add")
     public String add(@Validated Report report, BindingResult res, Model model,
             @AuthenticationPrincipal UserDetail userDetail) {
-        // ログインしている人以外には変更不可
+        /** ログインしている人以外には変更不可 */
         report.setEmployee(userDetail.getEmployee());
 
-        // 入力チェック_"エラーがある場合は新規登録画面を表示します"
+        /** 入力チェック_"エラーがある場合は新規登録画面を表示します" */
         if (res.hasErrors()) {
             return create(model, report, userDetail);
         }
@@ -111,7 +111,7 @@ public class ReportController {
         report.setEmployee(userDetail.getEmployee());
 
         if (res.hasErrors()) {
-            // エラーあり"@Validatedでの検証結果をBindingResultでresに格納、res上のエラーの有無を確認"
+            /** エラーあり"@Validatedでの検証結果をBindingResultでresに格納、res上のエラーの有無を確認" */
             return edit(null, model, report, userDetail);
         }
         // @Validatedで拾えないエラーの確認
