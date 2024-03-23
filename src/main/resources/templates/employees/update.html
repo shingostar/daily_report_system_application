@@ -25,7 +25,7 @@
                                         <label class="form-label" for="code">社員番号</label>
                                         <p class="mb-1"></p>
                                         <div class="col-md-7">
-                                            <input class="form-control" type="text" th:field="*{code}" th:errorclass="err" id="code">
+                                            <label><p class="align-middle" th:text="${employee.code}"></p></label>
                                             <span th:errors="*{code}" class="text-danger"></span>
                                             <span th:if="${codeError} neq null" th:text="${codeError}" class="text-danger"></span>
                                         </div>

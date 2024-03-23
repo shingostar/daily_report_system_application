@@ -79,6 +79,7 @@ public class EmployeeService {
 
         employeeRepository.save(employee);
         return ErrorKinds.SUCCESS;
+
     }
 
     // 従業員削除
